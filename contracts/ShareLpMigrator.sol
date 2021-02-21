@@ -10,7 +10,7 @@ import './ShareExchange.sol';
 
 import './lib/UniswapV2Library.sol';
 import './interfaces/IUniswapV2Pair.sol';
-import './interfaces/IUniswapV2Router.sol';
+import './interfaces/IUniswapV2Router02.sol';
 import './interfaces/IUniswapV2Factory.sol';
 
 contract ShareLpMigrator is ContractGuard {
@@ -74,7 +74,7 @@ contract ShareLpMigrator is ContractGuard {
         //Remove liquidity, which puts USDT and MISv1 in the contract
         IERC20(lp_old).safeApprove(univ2Router2, 0);
         IERC20(lp_old).safeApprove(univ2Router2, amount);
-        IUniswapV2Router(univ2Router2).removeLiquidity(
+        IUniswapV2Router02(univ2Router2).removeLiquidity(
                 share_old,
                 usdt,
                 amount,
@@ -98,7 +98,7 @@ contract ShareLpMigrator is ContractGuard {
         IERC20(usdt).safeApprove(univ2Router2, usdt_amount);
         IERC20(share_new).safeApprove(univ2Router2, 0);
         IERC20(share_new).safeApprove(univ2Router2, share_new_amount);
-        IUniswapV2Router(univ2Router2).addLiquidity(
+        IUniswapV2Router02(univ2Router2).addLiquidity(
                 usdt,
                 share_new,
                 usdt_amount,

@@ -14,7 +14,7 @@ import './CashExchange.sol';
 import './lib/UniswapV2Library.sol';
 import './lib/UniswapV2OracleLibrary.sol';
 import './interfaces/IUniswapV2Pair.sol';
-import './interfaces/IUniswapV2Router.sol';
+import './interfaces/IUniswapV2Router02.sol';
 import './interfaces/IUniswapV2Factory.sol';
 
 import './interfaces/IStakingRewardsv2.sol';
@@ -97,7 +97,7 @@ contract CashLpMigrator is ContractGuard {
         //Remove liquidity, which puts USDT and MICv1 in the contract
         IERC20(lp_old).safeApprove(univ2Router2, 0);
         IERC20(lp_old).safeApprove(univ2Router2, amount);
-        IUniswapV2Router(univ2Router2).removeLiquidity(
+        IUniswapV2Router02(univ2Router2).removeLiquidity(
                 cash_old,
                 usdt,
                 amount,
